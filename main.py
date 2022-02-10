@@ -1,0 +1,76 @@
+import PySimpleGUI as sg
+from person import Person
+
+
+def main():
+    sg.theme('DarkTeal4')
+
+    layout = [
+        [sg.Text(text="Create new person")],
+        [sg.Button(button_text='CREATE'), sg.Button('Cancel')]
+    ]
+
+    window = sg.Window("Human Horesepower", layout, default_element_size=(
+        12, 1), default_button_element_size=(12, 1))
+
+    while True:
+        event, values = window.read()
+
+        if event == "CREATE":
+            createNew()
+
+        if event == "Cancel" or event == sg.WIN_CLOSED:
+            break
+
+    window.close()
+
+
+def createNew():
+    sg.theme('DarkTeal4')
+
+    personLayout = [
+        [sg.Text("Input Height, Wieght")],
+        [sg.Text("Weight (lbs)", size=(15, 1)), sg.InputText()],
+        [sg.Text("Time (seconds)", size=(15, 1)), sg.InputText()],
+        [sg.Text("Average Step (inches)", size=(15, 1)), sg.InputText()],
+        [sg.Text("Total number of steps", size=(15, 1)), sg.InputText()],
+        [sg.Button(button_text="Calculate"),
+         sg.Text(size=(40, 1), key='AGAIN')],
+        [sg.Text("HORSEPOWER:"), sg.Text(size=(50, 1),
+                                         key='-OUTPUT-'), sg.Button("Submit")]
+    ]
+
+    window = sg.Window("Create New", personLayout)
+
+    while True:
+        event, values = window.read()
+
+        if event == "Calculate":
+
+            # add something to like make sure the input is right
+            if values[0].isnumeric() and values[1].isnumeric() and values[2].isnumeric() and values[3].isnumeric():
+
+                print(values[0])
+                # do stuff to person and then change
+                person = Person(values[0], values[1], values[2], values[3])
+
+                window["AGAIN"].update(str(""))
+                window["-OUTPUT-"].update(str(person.horsepower()))
+
+            else:
+                window["AGAIN"].update(
+                    str("make sure to enter values correctly"))
+
+        if event == "Submit":
+            # store in sheet & add to graph or whatever
+
+            break
+
+        if event == sg.WIN_CLOSED:
+            break
+
+    window.close()
+
+
+if __name__ == "__main__":
+    main()
