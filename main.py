@@ -50,12 +50,13 @@ def createNew():
             # add something to like make sure the input is right
             if values[0].isnumeric() and values[1].isnumeric() and values[2].isnumeric() and values[3].isnumeric():
 
-                print(values[0])
                 # do stuff to person and then change
                 person = Person(values[0], values[1], values[2], values[3])
 
+                horsepower = person.horsepower()
+
                 window["AGAIN"].update(str(""))
-                window["-OUTPUT-"].update(str(person.horsepower()))
+                window["-OUTPUT-"].update(str(horsepower))
 
             else:
                 window["AGAIN"].update(
@@ -64,7 +65,12 @@ def createNew():
         if event == "Submit":
             # store in sheet & add to graph or whatever
 
-            break
+            with open('data.txt', 'a') as writer:
+
+                writer.write(str(horsepower))
+                writer.write("\n")
+
+            break  
 
         if event == sg.WIN_CLOSED:
             break
