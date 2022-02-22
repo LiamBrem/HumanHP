@@ -1,13 +1,19 @@
 import PySimpleGUI as sg
 from person import Person
+import matplotlib.pyplot as plt 
+import numpy as np 
+
+
 
 
 def main():
     sg.theme('DarkTeal4')
 
+    
+
     layout = [
         [sg.Text(text="Create new person")],
-        [sg.Button(button_text='CREATE'), sg.Button('Cancel')]
+        [sg.Button(button_text='CREATE'), sg.Button('SHOW DATA'), sg.Button('Cancel')]
     ]
 
     window = sg.Window("Human Horesepower", layout, default_element_size=(
@@ -18,6 +24,10 @@ def main():
 
         if event == "CREATE":
             createNew()
+
+        if event == "SHOW DATA":
+            plt.scatter(xPoints, yPoints)
+            plt.show()    
 
         if event == "Cancel" or event == sg.WIN_CLOSED:
             break
@@ -58,6 +68,12 @@ def createNew():
                 window["AGAIN"].update(str(""))
                 window["-OUTPUT-"].update(str(horsepower))
 
+                global xPoints
+                global yPoints
+
+                yPoints += horsepower
+                xPoints += person.time
+
             else:
                 window["AGAIN"].update(
                     str("make sure to enter values correctly"))
@@ -67,7 +83,7 @@ def createNew():
 
             with open('data.txt', 'a') as writer:
 
-                writer.write(str(horsepower))
+                writer.write("HP" + str(horsepower))
                 writer.write("\n")
 
             break  
@@ -79,4 +95,11 @@ def createNew():
 
 
 if __name__ == "__main__":
+
+
+    xPoints = np.array([])
+    yPoints = np.array([])
+
+    
+
     main()
