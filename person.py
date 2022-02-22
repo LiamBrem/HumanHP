@@ -13,17 +13,17 @@ class Person():
         self.averageStep *= 0.0254 # converts from inches to meters
 
     def workDone(self): # in joules
-        print("WORK: " + str(self.heightOfStairs * self.weight))
+        # print("WORK: " + str(self.heightOfStairs * self.weight))
 
         return self.heightOfStairs * self.weight # we're gonna have to get the height in here 
 
     def powerExpended(self): # in watts
-        print("POWER: " + str(self.workDone() / self.time))
+        # print("POWER: " + str(self.workDone() / self.time))
 
         return self.workDone() / self.time
 
 
     def horsepower(self): 
-        print("HORSEPOWER: " + str(self.powerExpended()/746))
+        # print("HORSEPOWER: " + str(self.powerExpended()/746))
 
         return self.powerExpended()/746   
