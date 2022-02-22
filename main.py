@@ -71,8 +71,12 @@ def createNew():
                 global xPoints
                 global yPoints
 
-                yPoints += horsepower
-                xPoints += person.time
+                yPoints.append(horsepower)
+                xPoints.append(person.time)
+
+                print(xPoints)
+                print(yPoints)
+                
 
             else:
                 window["AGAIN"].update(
@@ -97,8 +101,8 @@ def createNew():
 if __name__ == "__main__":
 
 
-    xPoints = np.array([])
-    yPoints = np.array([])
+    xPoints = []
+    yPoints = []
 
     
 
